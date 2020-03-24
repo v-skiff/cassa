@@ -1,5 +1,5 @@
 from django import forms
-from .models import Member
+from .models import Member, Payment
 
 
 class MemberForm(forms.ModelForm):
@@ -12,4 +12,14 @@ class MemberForm(forms.ModelForm):
             'email':  forms.TextInput(attrs={'class': 'form-control'}),
             'note':  forms.Textarea(attrs={'class': 'form-control'}),
             'is_archived':  forms.CheckboxInput(attrs={'class': 'form-check-input'}),
+        }
+
+
+class PaymentForm(forms.ModelForm):
+    class Meta:
+        model = Payment
+        fields = ['value', 'member']
+        widgets = {
+            'value': forms.TextInput(attrs={'class': 'form-control'}),
+            'member':  forms.Select(attrs={'class': 'form-control'}),
         }

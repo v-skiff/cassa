@@ -3,10 +3,15 @@ from django.views.decorators.cache import never_cache
 from django.contrib.staticfiles.views import serve
 from django.conf.urls.static import static
 from django.conf import settings
-from .views import IndexView, MemberList, MemberDelete, MemberUpdate, MemberCreate, LoginView, LogoutView
+from .views import (IndexView, MemberList, MemberDelete, MemberUpdate, MemberCreate, LoginView, LogoutView,
+                    PaymentList, PaymentDelete, PaymentUpdate, PaymentCreate, MainReport)
 
 urlpatterns = [
-    # path('payment/list', MemberCreate.as_view(), name="member_create"),
+    path('report/main/', MainReport.as_view(), name="main_report"),
+    path('payment/create/', PaymentCreate.as_view(), name="payment_create"),
+    path('payment/update/<int:pk>/', PaymentUpdate.as_view(), name="payment_update"),
+    path('payment/delete/<int:pk>/', PaymentDelete.as_view(), name="payment_delete"),
+    path('payment/list/', PaymentList.as_view(), name="payment_list"),
     path('member/create/', MemberCreate.as_view(), name="member_create"),
     path('member/update/<int:pk>/', MemberUpdate.as_view(), name="member_update"),
     path('member/delete/<int:pk>/', MemberDelete.as_view(), name="member_delete"),
